@@ -18,8 +18,6 @@
 - Added null checks for `prefab.m_material` and `prefab.m_lodMaterial` before texture assignment
 - **Impact**: Prevents crashes and allows graceful degradation if any property is unavailable
 
-### Code Improvements
-
 #### Added missing namespace import
 - Added `using ColossalFramework;` to enable access to the Singleton class
 - **Impact**: Ensures the mod compiles correctly with the proper Singleton pattern
@@ -54,5 +52,5 @@
 The fix ensures:
 1. No null reference exceptions when `NetProperties` isn't immediately available
 2. Graceful handling if any intermediate property is null
-3. Compatibility with both old and new game versions
+3. Compatibility with new game version
 4. Alignment with the game's standard singleton access patterns used throughout Assembly-CSharp
