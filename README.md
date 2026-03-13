@@ -37,9 +37,8 @@
 1. Detect the old `PloppableAsphaltFix.xml` settings file (from the previous mod version)
 2. Import your custom asphalt color settings
 3. Write the settings to the new location (`Cities_Skylines/ModsSettings/PloppableAsphaltRenewed.xml`)
-4. **Clean up the old settings file** (delete `PloppableAsphaltFix.xml`) to avoid confusion
 
-No manual action is needed – your color preferences will be preserved automatically.
+**Manual cleanup:** After migration, you can safely delete the old `PloppableAsphaltFix.xml` file from your main `Cities_Skylines` folder if you wish. Your settings are now stored in the new location.
 
 ### Surface Rendering Fixes
 

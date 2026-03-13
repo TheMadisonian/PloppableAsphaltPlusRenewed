@@ -265,17 +265,7 @@ namespace PloppableAsphaltRenewed
                         File.Copy(oldModLegacyPath, tempPath);
                         if (File.Exists(fileName)) File.Delete(fileName);
                         File.Move(tempPath, fileName);
-                        
-                        // Clean up old settings file after successful migration
-                        try
-                        {
-                            File.Delete(oldModLegacyPath);
-                            Debug.Log("[Ploppable Asphalt Renewed]: Successfully migrated from old PloppableAsphaltFix.xml and cleaned up legacy file.");
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.Log(string.Format("[Ploppable Asphalt Renewed]: Warning - Could not delete legacy PloppableAsphaltFix.xml: {0}", ex.Message));
-                        }
+                        Debug.Log("[Ploppable Asphalt Renewed]: Successfully migrated settings from old PloppableAsphaltFix.xml. You can safely delete the old file from your Cities folder.");
                     }
                     catch (Exception)
                     {
