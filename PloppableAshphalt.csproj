@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
     <AssemblyName>PloppableAsphalt</AssemblyName>
-    <RootNamespace>PloppableAsphaltMod</RootNamespace>
+    <RootNamespace>PloppableAsphaltRenewed</RootNamespace>
     <OutputType>Library</OutputType>
     <Deterministic>false</Deterministic>
     <LangVersion>latest</LangVersion>
