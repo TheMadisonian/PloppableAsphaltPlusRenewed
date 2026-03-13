@@ -1,8 +1,7 @@
-# Ploppable Asphalt Fix - Recent Changelog
+# Ploppable Asphalt Renewed
 
 ## Version Update - Game Compatibility Fix
-
-### Bug Fixes
+- Updated for Race Day. 
 
 #### Fixed NullReferenceException in ApplyProperties() method
 - **Issue**: Mod was crashing with `System.NullReferenceException: Object reference not set to an instance of an object` when applying properties to ploppable asphalt decals during game load.
@@ -57,5 +56,3 @@ The fix ensures:
 2. Graceful handling if any intermediate property is null
 3. Compatibility with both old and new game versions
 4. Alignment with the game's standard singleton access patterns used throughout Assembly-CSharp
-
-*Verified upload at Thu Mar 12 21:12:12 CDT 2026
