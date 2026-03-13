@@ -41,11 +41,7 @@
 - Added guards in `SetRenderProperties`, `SetRenderPropertiesAll`, `ApplyProperties`, and `ApplyColors` loops to skip props with `m_mesh == null` or missing generated info.
 - Fixed `DesaturationControl` handling with null checks.
 
-### Files Modified
 
-- `PloppableAsphalt.cs`
-  - Line 1: Added `using ColossalFramework;` import
-  - Lines 433-447: Updated `ApplyProperties()` method to use Singleton pattern with proper null checks
 
 ### Testing Notes
 
