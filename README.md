@@ -43,7 +43,6 @@
 ### Surface Rendering Fixes
 
 - Preserved original texture behavior: non-decal props (asphalt, cliffgrass, gravel) only set **`_APRMap`** from the original `_ACIMap` texture, matching the original mod exactly.
-- Removed erroneous **`_MainTex`** and **`_XYSMap`** assignments that were introduced in a prior iteration and caused surfaces to appear excessively glossy (wet/specular map from `NetProperties` was being applied where it shouldn't have been).
 - The `ploppableasphalt-decal` mesh continues to set `_MainTex` to `m_upwardDiffuse` as in the original.
 - Used `HasProperty()` guards and null checks on `_APRMap` assignment to avoid shader errors.
 - Ensured the size/prop modifications don't crash when `m_generatedInfo` or `m_mesh` are null, which previously prevented surfaces from being processed at all.
