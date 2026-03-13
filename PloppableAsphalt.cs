@@ -194,6 +194,9 @@ namespace PloppableAsphaltRenewed
         // legacy path (old behaviour) kept for one-time migration
         [XmlIgnore]
         private static readonly string legacyPath = Path.Combine(DataLocation.localApplicationData, "PloppableAsphaltRenewed.xml");
+        // legacy path from old mod name (PloppableAsphaltFix.xml)
+        [XmlIgnore]
+        private static readonly string oldModLegacyPath = Path.Combine(DataLocation.localApplicationData, "PloppableAsphaltFix.xml");
 
         public Color AsphaltColor = new Color(128f, 128f, 128f, 1f);
         public bool AutoDeployed = false;
@@ -250,7 +253,54 @@ namespace PloppableAsphaltRenewed
                     }
                 }
 
-                // Otherwise, check for legacy file at root and migrate it
+                // Check for old mod name legacy file (PloppableAsphaltFix.xml) first and migrate it
+                if (File.Exists(oldModLegacyPath))
+                {
+                    try
+                    {
+                        var dir = Path.GetDirectoryName(fileName);
+                        if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                            Directory.CreateDirectory(dir);
+                        var tempPath = Path.Combine(dir ?? string.Empty, $"PloppableAsphaltRenewed.tmp-{Guid.NewGuid():N}.xml");
+                        File.Copy(oldModLegacyPath, tempPath);
+                        if (File.Exists(fileName)) File.Delete(fileName);
+                        File.Move(tempPath, fileName);
+                        
+                        // Clean up old settings file after successful migration
+                        try
+                        {
+                            File.Delete(oldModLegacyPath);
+                            Debug.Log("[Ploppable Asphalt Renewed]: Successfully migrated from old PloppableAsphaltFix.xml and cleaned up legacy file.");
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Log(string.Format("[Ploppable Asphalt Renewed]: Warning - Could not delete legacy PloppableAsphaltFix.xml: {0}", ex.Message));
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignore migration errors and attempt to read legacy file directly below
+                    }
+
+                    // attempt to read migrated/new file
+                    if (File.Exists(fileName))
+                    {
+                        using (var reader = new StreamReader(fileName))
+                        {
+                            var config = serializer.Deserialize(reader) as Configuration;
+                            return config;
+                        }
+                    }
+
+                    // fallback: try reading old mod legacy file directly
+                    using (var reader = new StreamReader(oldModLegacyPath))
+                    {
+                        var config = serializer.Deserialize(reader) as Configuration;
+                        return config;
+                    }
+                }
+
+                // Otherwise, check for legacy file at root (PloppableAsphaltRenewed.xml) and migrate it
                 if (File.Exists(legacyPath))
                 {
                     try
@@ -290,7 +340,7 @@ namespace PloppableAsphaltRenewed
             }
             catch (Exception ex)
             {
-                Debug.Log(string.Format("[Ploppable Asphalt Fix]: Error Parsing {0}: {1}", fileName, ex.Message.ToString()));
+                Debug.Log(string.Format("[Ploppable Asphalt Renewed]: Error Parsing {0}: {1}", fileName, ex.Message.ToString()));
                 return null;
             }
         }
