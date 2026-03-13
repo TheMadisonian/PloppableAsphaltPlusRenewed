@@ -453,18 +453,6 @@ namespace PloppableAsphaltRenewed
                         if (prefab.m_lodMaterial != null) prefab.m_lodMaterial.shader = shader3;
                     }
 
-                    // Road shaders require _MainTex (upward diffuse) and _XYSMap (wet/specular) --
-                    // same slots used by NetInfo.InitMeshData when building road LOD materials.
-                    var netProps = Singleton<NetManager>.instance?.m_properties;
-                    foreach (var mat in new[] { prefab.m_material, prefab.m_lodMaterial })
-                    {
-                        if (mat == null) continue;
-                        if (netProps?.m_upwardDiffuse != null && mat.HasProperty("_MainTex"))
-                            mat.SetTexture("_MainTex", netProps.m_upwardDiffuse);
-                        if (netProps?.m_upwardWetXYS != null && mat.HasProperty("_XYSMap"))
-                            mat.SetTexture("_XYSMap", netProps.m_upwardWetXYS);
-                    }
-
                     // Set _APRMap from the original ACI texture (ambient/pollution/roughness)
                     if (prefab.m_material != null && aprTex != null && prefab.m_material.HasProperty("_APRMap"))
                         prefab.m_material.SetTexture("_APRMap", aprTex);
