@@ -28,6 +28,18 @@
 - ✅ Verified that `NetProperties` structure is consistent across versions
 - ✅ Confirmed compatibility with the game's standard access patterns
 - ✅ Mod compiles without warnings or errors
+- ✅ **Automatic settings migration** from old PloppableAsphaltFix.xml (legacy mod)
+
+### Settings Migration
+
+**On first load, the mod will automatically:**
+
+1. Detect the old `PloppableAsphaltFix.xml` settings file (from the previous mod version)
+2. Import your custom asphalt color settings
+3. Write the settings to the new location (`Cities_Skylines/ModsSettings/PloppableAsphaltRenewed.xml`)
+4. **Clean up the old settings file** (delete `PloppableAsphaltFix.xml`) to avoid confusion
+
+No manual action is needed – your color preferences will be preserved automatically.
 
 ### Surface Rendering Fixes
 
